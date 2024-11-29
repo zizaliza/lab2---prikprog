@@ -16,13 +16,13 @@ class RegexService:
         self.record_repository = record_repository
         pass
 
-    def _find_snils(self, text: str) -> List[str]:
+    def _find_dates(self, text: str) -> List[str]:
         return re.findall(PATTERN, text)
     
-    def get_snils_in_file(self):
+    def get_dates_in_file(self):
         record_data = self.record_repository.get_all()
         record_str = ", ".join([str(asdict(record)) for record in record_data])
-        date = self._find_snils(record_str)
+        date = self._find_dates(record_str)
         return Record(link="jsonFile", date=date)
 
     def get_dates_in_web(self, url: str):
@@ -39,8 +39,6 @@ class RegexService:
             print(f"Error: {e}")
             return Record(link=url, dates=[])
 
-    def get_snils_in_text(self, text: str = "") -> List[str]:
+    def get_dates_in_text(self, text: str = "") -> List[str]:
         dates = self._find_dates(text)
-        self.record_repository.add(Record(link='text', dates=dates))
         return dates
-s
