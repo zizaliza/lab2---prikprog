@@ -9,7 +9,7 @@ from record import Record
 
 
 
-PATTERN = r'^\d{2}.\d{2}.\d{4}$'
+PATTERN = r'\d{2}[.]\d{2}[.]\d{4}'
 
 class RegexService:
     def init(self, record_repository: RecordRepository):
