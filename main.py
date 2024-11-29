@@ -28,7 +28,7 @@ def main():
                     url = input("Введите URL веб-страницы: ")
                     record = service.get_dates_in_web(url)
 
-                    print(f"Результат с веб-страницы: {record.dates}")
+                    print(f"Результат с веб-страницы: {record.date}")
 
                 case 3:
                     text = input("Введите текст: ")

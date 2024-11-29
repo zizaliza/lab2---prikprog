@@ -15,7 +15,7 @@ class RecordRepository(ABC):
         pass
 
 class JsonRecordRepository(RecordRepository):
-    def init(self, file_path: str = "records.json"):
+    def __init__(self, file_path: str = "records.json"):
         self.file_path = file_path
 
     def _load_record_from_file(self) -> List[Record]:

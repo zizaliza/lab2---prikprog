@@ -11,10 +11,9 @@ from record import Record
 
 PATTERN = r'\d{2}[.]\d{2}[.]\d{4}'
 
-class RegexService:
-    def init(self, record_repository: RecordRepository):
+class RegexService():
+    def __init__(self, record_repository: RecordRepository):
         self.record_repository = record_repository
-        pass
 
     def _find_dates(self, text: str) -> List[str]:
         return re.findall(PATTERN, text)
@@ -30,14 +29,14 @@ class RegexService:
             response = get(url)
             if response.status_code == 200:
                 dates = self._find_dates(response.text)
-                self.record_repository.add(Record(link=url, dates=dates))
-                return Record(link=url, dates=dates)
+                self.record_repository.add(Record(link=url, date=dates))
+                return Record(link=url, date=dates)
             else:
                 print(f"Error: Unable to fetch URL {url}, Status Code: {response.status_code}")
-                return Record(link=url, dates=[])
+                return Record(link=url, date=[])
         except RequestException as e:
             print(f"Error: {e}")
-            return Record(link=url, dates=[])
+            return Record(link=url, date=[])
 
     def get_dates_in_text(self, text: str = "") -> List[str]:
         dates = self._find_dates(text)
